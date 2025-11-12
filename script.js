@@ -1,45 +1,59 @@
+// Seleciona todos os elementos e botões principais
 const mensagens = document.querySelectorAll(".mensagem");
 const botaoSim = document.getElementById("sim");
 const botaoNao = document.getElementById("nao");
+const pedido = document.getElementById("pedido");
 
 let index = 0;
 
-// Inicialmente mostra a primeira mensagem
-mensagens[index].classList.add("active");
+// Oculta tudo no início
+mensagens.forEach(m => m.style.display = "none");
+if (pedido) pedido.style.display = "none";
 
-// Botões "Próximo" para mostrar a próxima mensagem
+// Mostra apenas a primeira mensagem
+if (mensagens.length > 0) {
+  mensagens[0].style.display = "block";
+  mensagens[0].classList.add("active");
+}
+
+// Avança com o botão "Próximo"
 document.querySelectorAll(".proximo").forEach((btn, i) => {
   btn.addEventListener("click", () => {
-    mensagens[i].classList.remove("active");
-    index++;
-    if(index < mensagens.length) {
-      mensagens[index].classList.add("active");
+    mensagens[i].style.display = "none"; // esconde atual
+    if (i + 1 < mensagens.length) {
+      mensagens[i + 1].style.display = "block"; // mostra próxima
     } else {
-      // Mostra a seção final
-      document.getElementById("pedido").style.display = "block";
+      // Se acabou, mostra o pedido final
+      if (pedido) pedido.style.display = "block";
     }
   });
 });
 
-// Botão "Não" foge
-botaoNao.addEventListener("mouseover", () => {
-  const largura = window.innerWidth - botaoNao.offsetWidth;
-  const altura = window.innerHeight - botaoNao.offsetHeight;
-  const x = Math.random() * largura;
-  const y = Math.random() * altura;
-  botaoNao.style.left = `${x}px`;
-  botaoNao.style.top = `${y}px`;
-});
+// Faz o botão "Não" fugir quando o mouse passa
+if (botaoNao) {
+  botaoNao.addEventListener("mouseover", () => {
+    const largura = window.innerWidth - botaoNao.offsetWidth;
+    const altura = window.innerHeight - botaoNao.offsetHeight;
+    const x = Math.random() * largura;
+    const y = Math.random() * altura;
+    botaoNao.style.position = "absolute";
+    botaoNao.style.left = `${x}px`;
+    botaoNao.style.top = `${y}px`;
+  });
+}
 
-// Gatinhos caindo ao clicar no "Sim"
-botaoSim.addEventListener("click", () => {
-  for(let i=0; i<20; i++){
-    const gatinho = document.createElement("img");
-    gatinho.src = "https://i.postimg.cc/ZK0m6WBr/cute-cat.png"; 
-    gatinho.className = "gatinho";
-    gatinho.style.left = Math.random() * window.innerWidth + "px";
-    gatinho.style.animationDuration = 3 + Math.random() * 3 + "s";
-    document.body.appendChild(gatinho);
-    setTimeout(() => gatinho.remove(), 6000);
-  }
-});
+// Faz os gatinhos caírem quando clica no "Sim"
+if (botaoSim) {
+  botaoSim.addEventListener("click", () => {
+    for (let i = 0; i < 20; i++) {
+      const gatinho = document.createElement("img");
+      gatinho.src = "https://i.postimg.cc/ZK0m6WBr/cute-cat.png";
+      gatinho.className = "gatinho";
+      gatinho.style.left = Math.random() * window.innerWidth + "px";
+      gatinho.style.animationDuration = 3 + Math.random() * 3 + "s";
+      document.body.appendChild(gatinho);
+      setTimeout(() => gatinho.remove(), 6000);
+    }
+  });
+}
+
