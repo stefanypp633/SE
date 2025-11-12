@@ -1,4 +1,3 @@
-// Seleciona elementos
 const mensagens = document.querySelectorAll(".mensagem");
 const botaoSim = document.getElementById("sim");
 const botaoNao = document.getElementById("nao");
@@ -6,7 +5,7 @@ const pedido = document.getElementById("pedido");
 
 let index = 0;
 
-// Esconde todas as mensagens no começo
+// Esconde todas as mensagens e pedido no início
 mensagens.forEach(m => m.style.display = "none");
 if (pedido) pedido.style.display = "none";
 
@@ -15,7 +14,7 @@ if (mensagens.length > 0) {
   mensagens[0].style.display = "block";
 }
 
-// Botões "Próximo"
+// Botões "Próximo" para avançar mensagens
 document.querySelectorAll(".proximo").forEach((btn, i) => {
   btn.addEventListener("click", () => {
     mensagens[i].style.display = "none";
@@ -40,10 +39,10 @@ if (botaoNao) {
   });
 }
 
-// Botão "Sim" mostra a frase final
+// Botão "Sim" mostra apenas a frase final
 if (botaoSim) {
   botaoSim.addEventListener("click", () => {
-    // Remove os botões Sim e Não
+    // Esconde os botões
     botaoSim.style.display = "none";
     botaoNao.style.display = "none";
 
@@ -52,8 +51,8 @@ if (botaoSim) {
     fraseFinal.textContent = "Obrigada por aceitar, você tem um ótimo gosto :)";
     fraseFinal.style.fontSize = "22px";
     fraseFinal.style.color = "#800080";
-    fraseFinal.style.marginTop = "20px";
     fraseFinal.style.fontWeight = "bold";
+    fraseFinal.style.marginTop = "20px";
 
     if (pedido) {
       pedido.appendChild(fraseFinal);
