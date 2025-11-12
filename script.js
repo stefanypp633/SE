@@ -1,4 +1,4 @@
-// Seleciona todos os elementos de mensagem e botões
+// Seleciona elementos
 const mensagens = document.querySelectorAll(".mensagem");
 const botaoSim = document.getElementById("sim");
 const botaoNao = document.getElementById("nao");
@@ -15,22 +15,19 @@ if (mensagens.length > 0) {
   mensagens[0].style.display = "block";
 }
 
-// Adiciona funcionalidade aos botões "Próximo"
+// Botões "Próximo"
 document.querySelectorAll(".proximo").forEach((btn, i) => {
   btn.addEventListener("click", () => {
-    // Esconde a mensagem atual
     mensagens[i].style.display = "none";
-    // Mostra a próxima mensagem
     if (i + 1 < mensagens.length) {
       mensagens[i + 1].style.display = "block";
     } else {
-      // Se acabou, mostra a seção final
       if (pedido) pedido.style.display = "block";
     }
   });
 });
 
-// Botão "Não" foge quando o mouse passa
+// Botão "Não" foge
 if (botaoNao) {
   botaoNao.addEventListener("mouseover", () => {
     const largura = window.innerWidth - botaoNao.offsetWidth;
@@ -43,7 +40,23 @@ if (botaoNao) {
   });
 }
 
-// Gatinhos caindo ao clicar no "Sim"
+// Botão "Sim" mostra a frase final
 if (botaoSim) {
-  botaoSim.addEventListener
+  botaoSim.addEventListener("click", () => {
+    // Remove os botões Sim e Não
+    botaoSim.style.display = "none";
+    botaoNao.style.display = "none";
+
+    // Cria a frase final
+    const fraseFinal = document.createElement("p");
+    fraseFinal.textContent = "Obrigada por aceitar, você tem um ótimo gosto :)";
+    fraseFinal.style.fontSize = "22px";
+    fraseFinal.style.color = "#800080";
+    fraseFinal.style.marginTop = "20px";
+    fraseFinal.style.fontWeight = "bold";
+
+    if (pedido) {
+      pedido.appendChild(fraseFinal);
+    }
+  });
 }
