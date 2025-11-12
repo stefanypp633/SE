@@ -1,138 +1,125 @@
-body {
-  background: linear-gradient(to bottom right, #ffe6f0, #ffd6d6);
-  font-family: "Arial", sans-serif;
-  text-align: center;
-  color: #333;
+/* Reset básico */
+body, html {
   margin: 0;
   padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #fff0f5; /* lilás claro */
+  text-align: center;
   overflow-x: hidden;
+}
+
+h1, h2, p {
+  color: #800080; /* roxo */
 }
 
 .container {
   max-width: 800px;
-  margin: 50px auto;
-  background: #fff;
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  position: relative;
-}
-
-h1 {
-  color: #e91e63;
-  font-size: 2.5em;
-  margin-bottom: 20px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .mensagem {
-  display: none;
-  margin-bottom: 30px;
+  display: none; /* todas escondidas por padrão */
+  margin-bottom: 20px;
+  animation: fadeIn 0.8s ease;
 }
 
 .mensagem.active {
   display: block;
 }
 
-.mensagem p {
-  font-size: 1.2em;
-  margin: 15px 0;
-  line-height: 1.6;
-}
-
-.foto {
-  width: 250px;
-  border-radius: 15px;
-  margin: 15px 0;
-  border: 3px solid #e91e63;
-  transition: transform 0.3s;
-}
-
-.foto:hover {
-  transform: scale(1.05);
-}
-
 .proximo {
   padding: 10px 20px;
-  font-size: 1em;
-  border-radius: 10px;
+  font-size: 16px;
+  background-color: #800080;
+  color: white;
   border: none;
-  background-color: #e91e63;
-  color: #fff;
+  border-radius: 8px;
   cursor: pointer;
   margin-top: 10px;
+  transition: background 0.3s;
 }
 
 .proximo:hover {
-  transform: scale(1.05);
+  background-color: #b300b3;
 }
 
-.final {
-  position: relative;
-  margin-top: 50px;
-  padding: 50px 20px;
-  border-radius: 20px;
-  overflow: hidden;
-  color: purple; /* letras roxas no final */
-  display: none; /* só mostra no final */
-}
-
-.final .fundo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-  opacity: 0.5;
-}
-
-.final .pedido-texto {
-  position: relative;
-  z-index: 2;
-}
-
-.final h2 {
-  margin-top: 20px;
-}
-
+/* Botões de Sim e Não */
 .botoes {
-  margin-top: 20px;
-  position: relative;
-  height: 100px;
+  margin-top: 30px;
 }
 
-button {
-  background-color: #e91e63;
-  color: white;
+#sim, #nao {
+  padding: 15px 30px;
+  font-size: 18px;
   border: none;
-  padding: 12px 25px;
-  font-size: 1.1em;
   border-radius: 10px;
   cursor: pointer;
-  margin: 10px;
-  transition: 0.3s;
+  position: relative;
 }
 
-button:hover {
-  transform: scale(1.05);
+#sim {
+  background-color: #ff69b4;
+  color: white;
+}
+
+#sim:hover {
+  background-color: #ff85c1;
 }
 
 #nao {
-  background-color: #999;
-  position: absolute;
+  background-color: #ccc;
+}
+
+#pedido {
+  display: none;
+  margin-top: 30px;
 }
 
 /* Gatinhos caindo */
 .gatinho {
   position: fixed;
   width: 50px;
+  height: 50px;
   pointer-events: none;
-  z-index: 9999;
-  animation: cair 5s linear forwards;
+  animation-name: cair;
+  animation-timing-function: linear;
 }
 
 @keyframes cair {
-  0% { transform: translateY(-60px) rotate(0deg); }
-  100% { transform: translateY(100vh) rotate(360deg); }
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
 }
+
+/* Fotos dentro das mensagens */
+.mensagem img {
+  max-width: 80%;
+  border-radius: 15px;
+  margin-top: 10px;
+}
+
+/* Responsividade */
+@media screen and (max-width: 600px) {
+  .proximo, #sim, #nao {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+
+  .gatinho {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* FadeIn Animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
