@@ -45,15 +45,5 @@ if (botaoNao) {
 
 // Gatinhos caindo ao clicar no "Sim"
 if (botaoSim) {
-  botaoSim.addEventListener("click", () => {
-    for (let i = 0; i < 20; i++) {
-      const gatinho = document.createElement("img");
-      gatinho.src = "https://i.postimg.cc/ZK0m6WBr/cute-cat.png"; // URL do gatinho
-      gatinho.className = "gatinho";
-      gatinho.style.left = Math.random() * window.innerWidth + "px";
-      gatinho.style.animationDuration = 3 + Math.random() * 3 + "s";
-      document.body.appendChild(gatinho);
-      setTimeout(() => gatinho.remove(), 6000);
-    }
-  });
+  botaoSim.addEventListener
 }
